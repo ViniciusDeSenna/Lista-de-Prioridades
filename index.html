@@ -17,6 +17,16 @@
         <div class="elementos-da-lista">
           <div class="prioridade">
 
+            <div class="dropdown-container">
+              <button class="image-button">Prioridade</button>
+              <img class="selected-image" src="" alt="Imagem Selecionada">
+              <div class="image-dropdown">
+                  <img src="/svg/Group 17.svg" alt="Imagem 1">
+                  <img src="/svg/Group 16.svg" alt="Imagem 2">
+                  <img src="/svg/Group 15.svg" alt="Imagem 3">
+              </div>
+          </div>
+
             <li>Prioridade</li>
             <button class="botao-concluida">Concluida</button>
           </div>
@@ -27,7 +37,31 @@
     <button class="botao-nova-lista">Nova Lista</button>
   </div>
 </body>
-<script>
 
+
+<script>
+  const imageButton = document.querySelector('.image-button');
+        const selectedImage = document.querySelector('.selected-image');
+        const imageDropdown = document.querySelector('.image-dropdown');
+
+        imageButton.addEventListener('click', () => {
+            imageDropdown.style.display = (imageDropdown.style.display === 'block') ? 'none' : 'block';
+        });
+
+        imageDropdown.addEventListener('click', (e) => {
+            if (e.target.tagName === 'IMG') {
+                selectedImage.src = e.target.src;
+                imageButton.style.display = 'none';
+                selectedImage.style.display = 'block';
+                imageDropdown.style.display = 'none';
+            }
+        });
+
+        // Fechar o dropdown se o usuário clicar fora dele
+        document.addEventListener('click', (e) => {
+            if (!imageButton.contains(e.target) && !imageDropdown.contains(e.target)) {
+                imageDropdown.style.display = 'none';
+            }
+        });
 </script>
 </html>
